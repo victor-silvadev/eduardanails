@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duda Nails | Studio de Beleza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <nav class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Duda Nails Logo">
+    </div>
+    <ul class="nav-links">
+        <li><a onclick="showSection('inicio')">Início</a></li>
+        <li><a onclick="localStorage.setItem('abaDestino', 'agendar'); location.reload();">Agenda</a></li>
+        <li><a onclick="showSection('admin')">Admin</a></li>
+    </ul>
+   </nav>
+
+<!-- ══════════════════ INÍCIO ══════════════════ -->
+<div id="inicio" class="section" style="display:block;">
+    <div class="hero">
+        <h1>Arte nas suas mãos.</h1>
+        <p>Design exclusivo e cuidado profissional para unhas perfeitas.</p><br>
+        <button class="btn-gold" onclick="localStorage.setItem('abaDestino', 'agendar'); location.reload();">Agende seu Momento</button>
+    </div>
+</div>
+
+<!-- ══════════════════ AGENDAR ══════════════════ -->
+<div id="agendar" class="section" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Reserve seu Horário</h2>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prevMonthBtn" class="nav-btn" onclick="changeMonth(-1)">&#10094;</button>
+                <span id="monthDisplay"></span>
+                <button id="nextMonthBtn" class="nav-btn" onclick="changeMonth(1)">&#10095;</button>
+            </div>
+            <div class="calendar-grid-header">
+                <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+            </div>
+            <div class="calendar-grid" id="visualCalendar"></div>
+        </div>
+        <input type="hidden" id="datePicker">
+        <div id="hoursGrid" class="hours-grid"></div>
+    </div>
+</div>
+
+<!-- ══════════════════ ADMIN ══════════════════ -->
+<div id="admin" class="section" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Painel Administrativo</h2>
+
+        <!-- Login -->
+        <div id="adminLogin">
+            <h3>Acesso Restrito</h3>
+            <input type="password" id="adminPass" placeholder="Senha de Acesso">
+            <button class="btn-gold" style="width:100%;" onclick="checkAdmin()">Entrar</button>
+        </div>
+
+        <!-- Painel com abas -->
+        <div id="adminPanel" style="display:none;">
+
+            <!-- Abas de navegação -->
+            <div class="admin-tabs">
+                <button class="admin-tab-btn active" data-tab="pendentes" onclick="loadAdminTab('pendentes')">
+                    ⚠️ Pendentes
+                </button>
+                <button class="admin-tab-btn" data-tab="confirmados" onclick="loadAdminTab('confirmados')">
+                    ✅ Confirmados
+                </button>
+                <button class="admin-tab-btn" data-tab="expirados" onclick="loadAdminTab('expirados')">
+                    🕒 Expirados
+                </button>
+                <button class="admin-tab-btn" data-tab="configurar" onclick="loadAdminTab('configurar')">
+                    ⚙️ Configurar
+                </button>
+            </div>
+
+            <!-- Aba: Pendentes -->
+            <div id="tab-pendentes" class="admin-tab-content">
+                <div class="tab-header">
+                    <h3>Aguardando sua confirmação</h3>
+                    <p class="tab-desc">Estes agendamentos expiram automaticamente em 30 minutos se não forem confirmados.</p>
+                </div>
+                <div id="pendentes-list" class="bookings-list"></div>
+            </div>
+
+            <!-- Aba: Confirmados -->
+            <div id="tab-confirmados" class="admin-tab-content" style="display:none;">
+                <div class="tab-header">
+                    <h3>Agenda Confirmada</h3>
+                    <p class="tab-desc">Sua agenda oficial. Estes horários estão bloqueados para clientes.</p>
+                </div>
+                <div id="confirmados-list" class="bookings-list"></div>
+            </div>
+
+            <!-- Aba: Expirados -->
+            <div id="tab-expirados" class="admin-tab-content" style="display:none;">
+                <div class="tab-header">
+                    <h3>Não Confirmados a Tempo</h3>
+                    <p class="tab-desc">Você ainda pode confirmar ou entrar em contato com esses clientes via WhatsApp.</p>
+                </div>
+                <div id="expirados-list" class="bookings-list"></div>
+            </div>
+
+            <!-- Aba: Configurar -->
+            <div id="tab-configurar" class="admin-tab-content" style="display:none;">
+                <div class="admin-controls">
+                    <div>
+                        <label style="margin-right:10px;">Selecionar data:</label>
+                        <input type="date" id="adminDatePicker" onchange="loadAdminHours()" style="max-width:200px; display:inline-block; margin-bottom:0;">
+                    </div>
+                    <button class="btn-gold" style="background: #ef9a9a; font-size: 0.7rem;" onclick="toggleBlockDay()">🚫 Bloquear/Liberar este Dia</button>
+                </div>
+                <div id="adminEditor">
+                    <h3 style="font-family: 'Playfair Display'; color: var(--pink-gold); margin-bottom: 20px; text-align:center;">Configurar Horários do Dia</h3>
+                    <div id="hoursEditList"></div>
+                    <div style="display: flex; gap: 15px; justify-content:center;">
+                        <button class="btn-gold" onclick="addNewHourField()">+ Novo Horário</button>
+                        <button class="btn-gold" onclick="confirmAllChanges()" style="background: #81c784;">💾 Salvar no Sistema</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /adminPanel -->
+    </div>
+</div>
+
+<!-- ══════════════════ MODAL CLIENTE ══════════════════ -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h3>Solicitar Agendamento</h3>
+        <p id="selectedDetails" class="modal-details"></p>
+        <input type="text" id="userName" placeholder="Seu Nome Completo">
+        <input type="text" id="userPhone" placeholder="Seu WhatsApp (ex: 21999999999)">
+        <button class="btn-gold" onclick="saveBooking()" style="width: 100%;">Enviar Solicitação via WhatsApp</button>
+        <p class="modal-warning">⚠️ Atenção: Seu horário ficará reservado por apenas <strong>30 minutos</strong>. Conclua o atendimento no WhatsApp para garantir sua vaga.</p>
+        <button onclick="closeModal()" class="btn-back">Voltar</button>
+    </div>
+</div>
+
+<!-- ══════════════════ MODAL ADMIN (legado) ══════════════════ -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <h3>Gerenciar Pedido</h3>
+        <p id="adminModalText" class="admin-modal-text"></p>
+        <div class="modal-actions">
+            <button class="btn-confirm" onclick="confirmarAgendamento()">Confirmar</button>
+            <button class="btn-release" onclick="liberarAgendamento()">Liberar</button>
+        </div>
+        <button onclick="closeAdminModal()" class="btn-back">Fechar</button>
+    </div>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+:root {
+    --pink-quartz: #fdf0f2;
+    --pink-gold: #E67E96;
+    --gold: #AD2B4A;
+    --text-dark: #49121F;
+    --white: #ffffff;
+    --shadow-pink: 0 10px 30px rgba(173, 43, 74, 0.15);
+    --deep: #61353F;
+    --vivid: #E0385F;
+    --green: #4caf50;
+    --orange: #ff9800;
+    --gray: #9e9e9e;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: var(--pink-quartz); color: var(--text-dark); overflow-x: hidden; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.section { animation: fadeInUp 0.8s ease-out; }
+
+/* ── Navbar ── */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 8%; background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid var(--pink-gold);
+}
+.logo { display: flex; align-items: center; justify-content: center; background-color: white; padding: 10px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.logo img { height: 70px; width: auto; transition: transform 0.3s ease; }
+.logo img:hover { transform: scale(1.05); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links li a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: 0.3s; }
+.nav-links li a:hover { color: var(--vivid); }
+
+/* ── Hero ── */
+.hero { height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(73,18,31,0.45), rgba(97,53,63,0.45)), url('https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; padding: 0 20px; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; margin-bottom: 15px; color: var(--white); text-shadow: 0 2px 12px rgba(73,18,31,0.4); }
+.hero p { color: #fbe8ec; }
+
+/* ── Calendário ── */
+.calendar-container { background: white; padding: 25px; border-radius: 30px; box-shadow: var(--shadow-pink); max-width: 400px; margin: 20px auto; border: 1px solid #f5c6d0; }
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.calendar-header span { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--gold); flex-grow: 1; text-align: center; }
+.nav-btn { background: var(--pink-quartz); border: 1px solid var(--pink-gold); color: var(--gold); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+.nav-btn:hover { background: var(--gold); color: white; }
+.calendar-grid-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.calendar-day { padding: 12px 5px; border-radius: 12px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; text-align: center; background: var(--pink-quartz); color: var(--text-dark); }
+.calendar-day:hover:not(.blocked) { background: var(--pink-gold); color: white; transform: scale(1.1); }
+.calendar-day.blocked { background: #E0385F; color: white; cursor: not-allowed; text-decoration: line-through; opacity: 0.6; }
+.calendar-day.selected { background: var(--gold); color: white; font-weight: bold; }
+.calendar-day.empty { background: transparent; cursor: default; }
+
+/* ── Geral ── */
+.section-title { font-family: 'Playfair Display'; font-size: 3rem; text-align: center; margin-bottom: 40px; color: var(--gold); }
+.container { max-width: 1000px; margin: 60px auto; padding: 0 20px; }
+.btn-gold { background: linear-gradient(135deg, var(--pink-gold), var(--gold)); color: white; border: none; padding: 15px 40px; border-radius: 50px; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(173,43,74,0.3); transition: 0.4s ease; }
+.btn-gold:hover { transform: scale(1.05); background: linear-gradient(135deg, var(--vivid), var(--text-dark)); }
+
+input[type="date"], input[type="text"], input[type="password"] { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid var(--pink-gold); border-radius: 15px; outline: none; background-color: var(--white); color: var(--text-dark); }
+input[type="date"]:focus, input[type="text"]:focus, input[type="password"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(173,43,74,0.1); }
+
+/* ── Horários (cliente) ── */
+.hours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px; }
+.card { background: var(--white); padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #f5c6d0; transition: 0.3s ease; cursor: pointer; box-shadow: var(--shadow-pink); }
+.card:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(173,43,74,0.2); }
+.card.disponivel { border-left: 5px solid var(--pink-gold); color: var(--gold); }
+.card.pendente { background: #fff8f0; border-left: 5px solid var(--orange); color: var(--orange); cursor: default; }
+.card.confirmado { background: #f5fff7; border-left: 5px solid #81c784; color: #4caf50; cursor: default; }
+.card.expirado { display: none; } /* expirados aparecem como disponíveis */
+.card .countdown { display: block; font-size: 0.75rem; margin-top: 6px; font-weight: 600; letter-spacing: 1px; }
+
+/* ── Aviso do Modal ── */
+.modal-warning { font-size: 0.78rem; color: var(--orange); background: #fff8f0; border: 1px solid #ffd0a0; border-radius: 10px; padding: 10px 14px; margin: 14px 0 4px; text-align: left; line-height: 1.5; }
+
+/* ── Admin Login ── */
+#adminLogin { max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 30px; box-shadow: var(--shadow-pink); }
+#adminLogin h3 { font-family: 'Playfair Display'; text-align: center; margin-bottom: 20px; color: var(--gold); }
+
+/* ── Admin Tabs ── */
+.admin-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    background: white; padding: 16px; border-radius: 20px;
+    box-shadow: var(--shadow-pink); margin-bottom: 24px;
+}
+.admin-tab-btn {
+    flex: 1; min-width: 120px; padding: 12px 16px; border: 2px solid #f5c6d0;
+    border-radius: 14px; background: var(--pink-quartz); color: var(--text-dark);
+    cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: 0.3s;
+    text-align: center; letter-spacing: 0.5px;
+}
+.admin-tab-btn:hover { border-color: var(--pink-gold); color: var(--gold); }
+.admin-tab-btn.active { background: linear-gradient(135deg, var(--pink-gold), var(--gold)); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(173,43,74,0.25); }
+
+/* ── Tab content ── */
+.admin-tab-content { animation: fadeInUp 0.4s ease; }
+.tab-header { margin-bottom: 20px; }
+.tab-header h3 { font-family: 'Playfair Display'; color: var(--gold); font-size: 1.5rem; margin-bottom: 6px; }
+.tab-desc { color: #999; font-size: 0.82rem; }
+
+/* ── Booking Cards (admin) ── */
+.bookings-list { display: flex; flex-direction: column; gap: 14px; }
+.admin-booking-card {
+    background: white; border-radius: 18px; padding: 18px 22px;
+    box-shadow: var(--shadow-pink); display: flex;
+    justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap; transition: 0.3s;
+    border-left: 5px solid #ddd;
+}
+.admin-booking-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(173,43,74,0.18); }
+.pendente-card { border-left-color: var(--orange); }
+.confirmado-card { border-left-color: var(--green); }
+.expirado-card { border-left-color: var(--gray); opacity: 0.85; }
+.expired-card { border-left-color: #E0385F; opacity: 0.75; }
+
+.booking-info { display: flex; flex-direction: column; gap: 4px; }
+.booking-time { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
+.booking-client { font-size: 0.88rem; color: var(--deep); }
+.booking-phone { font-size: 0.82rem; color: #888; }
+.booking-expiry { font-size: 0.78rem; font-weight: 600; color: var(--orange); margin-top: 2px; }
+.booking-tag { font-size: 0.75rem; color: var(--gray); font-style: italic; }
+
+.booking-actions { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+.btn-confirm-sm { background: #4caf50; color: white; border: none; padding: 9px 14px; border-radius: 10px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
+.btn-confirm-sm:hover { background: #388e3c; transform: scale(1.03); }
+.btn-release-sm { background: #ef9a9a; color: white; border: none; padding: 9px 14px; border-radius: 10px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
+.btn-release-sm:hover { background: #e53935; transform: scale(1.03); }
+.btn-whats-sm { background: #25D366; color: white; border: none; padding: 9px 14px; border-radius: 10px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
+.btn-whats-sm:hover { background: #1da851; transform: scale(1.03); }
+
+.loading-msg, .empty-msg { text-align: center; color: #bbb; padding: 40px 20px; font-size: 0.9rem; font-style: italic; }
+
+/* ── Configurar ── */
+.admin-controls { background: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: var(--shadow-pink); text-align: center; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.admin-hour-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-radius: 12px; background: var(--pink-quartz); margin-bottom: 8px; border-left: 4px solid var(--pink-gold); }
+#adminEditor { padding: 30px; background: #fff; border-radius: 25px; border: 1px solid var(--pink-quartz); box-shadow: var(--shadow-pink); }
+#hoursEditList { margin-bottom: 20px; max-height: 300px; overflow-y: auto; padding-right: 10px; }
+
+/* ── Modais ── */
+.modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(73,18,31,0.45); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 2000; }
+.modal-content { background: var(--white); padding: 40px; border-radius: 30px; width: 90%; max-width: 400px; text-align: center; animation: fadeInUp 0.5s ease; border-top: 4px solid var(--gold); }
+.modal-content h3 { font-family: 'Playfair Display'; color: var(--text-dark); margin-bottom: 10px; }
+.modal-details { margin: 15px 0; color: var(--pink-gold); font-weight: bold; }
+.btn-back { background: none; border: none; margin-top: 15px; cursor: pointer; color: #999; font-size: 0.8rem; }
+.admin-modal-text { margin: 20px 0; text-align: left; font-size: 0.9rem; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; }
+.btn-confirm { flex: 1; background: #81c784; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
+.btn-release { flex: 1; background: #ef9a9a; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
+
+/* ── Responsivo ── */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 2.8rem; }
+    .admin-tabs { gap: 6px; }
+    .admin-tab-btn { font-size: 0.72rem; padding: 10px 10px; }
+    .admin-booking-card { flex-direction: column; align-items: flex-start; }
+    .booking-actions { width: 100%; }
+    .btn-confirm-sm, .btn-release-sm, .btn-whats-sm { flex: 1; text-align: center; }
+}
