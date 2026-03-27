@@ -22,8 +22,11 @@
 <!-- ══════════════════ INÍCIO ══════════════════ -->
 <div id="inicio" class="section" style="display:block;">
     <div class="hero">
+        <p class="hero-eyebrow">Studio de Beleza</p>
         <h1>Arte nas suas mãos.</h1>
-        <p>Design exclusivo e cuidado profissional para unhas perfeitas.</p><br>
+        <div class="hero-divider"></div>
+        <p>Design exclusivo e cuidado profissional<br>para unhas verdadeiramente perfeitas.</p>
+        <br>
         <button class="btn-gold" onclick="localStorage.setItem('abaDestino', 'agendar'); location.reload();">Agende seu Momento</button>
     </div>
 </div>
@@ -56,6 +59,7 @@
         <!-- Login -->
         <div id="adminLogin">
             <h3>Acesso Restrito</h3>
+            <p class="login-subtitle">Área exclusiva Duda Nails</p>
             <input type="password" id="adminPass" placeholder="Senha de Acesso">
             <button class="btn-gold" style="width:100%;" onclick="checkAdmin()">Entrar</button>
         </div>
@@ -113,14 +117,14 @@
                         <label style="margin-right:10px;">Selecionar data:</label>
                         <input type="date" id="adminDatePicker" onchange="loadAdminHours()" style="max-width:200px; display:inline-block; margin-bottom:0;">
                     </div>
-                    <button class="btn-gold" style="background: #ef9a9a; font-size: 0.7rem;" onclick="toggleBlockDay()">🚫 Bloquear/Liberar este Dia</button>
+                    <button class="btn-gold" style="background: linear-gradient(135deg,#ef9a9a,#e57373); font-size: 0.68rem;" onclick="toggleBlockDay()">🚫 Bloquear / Liberar este Dia</button>
                 </div>
                 <div id="adminEditor">
-                    <h3 style="font-family: 'Playfair Display'; color: var(--pink-gold); margin-bottom: 20px; text-align:center;">Configurar Horários do Dia</h3>
+                    <h3>Configurar Horários do Dia</h3>
                     <div id="hoursEditList"></div>
                     <div style="display: flex; gap: 15px; justify-content:center;">
                         <button class="btn-gold" onclick="addNewHourField()">+ Novo Horário</button>
-                        <button class="btn-gold" onclick="confirmAllChanges()" style="background: #81c784;">💾 Salvar no Sistema</button>
+                        <button class="btn-gold" onclick="confirmAllChanges()" style="background: linear-gradient(135deg,#81c784,#4caf50);">💾 Salvar no Sistema</button>
                     </div>
                 </div>
             </div>
