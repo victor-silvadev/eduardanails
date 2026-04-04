@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "agendamentos": {
+      ".read": true,
+      "$data": {
+        "$horario": {
+          ".write": true,
+          ".validate": "
+            newData.hasChildren(['time', 'status']) &&
+            newData.child('status').isString() &&
+            newData.child('status').val().matches(/^(disponivel|pendente|confirmado|expirado)$/) &&
+            newData.child('time').isString() &&
+            newData.child('time').val().length <= 10 &&
+            (!newData.hasChild('nome') || (newData.child('nome').isString() && newData.child('nome').val().length <= 80)) &&
+            (!newData.hasChild('telefone') || (newData.child('telefone').isString() && newData.child('telefone').val().length <= 11))
+          "
+        }
+      }
+    },
+    "config": {
+      "bloqueios": {
+        ".read": true,
+        ".write": "auth != null"
+      },
+      "contato": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    }
+  }
+}
