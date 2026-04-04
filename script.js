@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 
-const EXPIRY_MS = 30 * 60 * 1000;
+const EXPIRY_MS = 60 * 60 * 1000; // 1 hora em ms
 
 let selectedDate = "";
 let selectedHourId = "";

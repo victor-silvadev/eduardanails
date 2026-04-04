@@ -267,7 +267,9 @@ body::before {
 ════════════════════════════════════════ */
 input[type="date"],
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"],
+input[type="email"] {
     width: 100%;
     padding: 14px 18px;
     margin-bottom: 14px;
@@ -283,7 +285,9 @@ input[type="password"] {
 }
 input[type="date"]:focus,
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
     border-color: var(--pink-gold);
     box-shadow: 0 0 0 4px rgba(230,126,150,0.1);
     background-color: #fff;

@@ -5,19 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duda Nails | Studio de Beleza</title>
 
-    <!-- FIX #7: Cabeçalhos de segurança via meta tags -->
+    <!-- Cabeçalhos de segurança via meta tags -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <!-- Content Security Policy: permite apenas recursos do próprio site e Firebase/Google -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' https://www.gstatic.com;
-        connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com;
-        style-src 'self' 'unsafe-inline';
-        img-src 'self' data:;
-        font-src 'self';
-    ">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -163,7 +154,7 @@
         <input type="text" id="userName" placeholder="Seu Nome Completo" maxlength="80">
         <input type="tel" id="userPhone" placeholder="Seu WhatsApp (ex: 21999999999)" maxlength="15">
         <button class="btn-gold" onclick="saveBooking()" style="width: 100%;">Enviar Solicitação via WhatsApp</button>
-        <p class="modal-warning">⚠️ Atenção: Seu horário ficará reservado por apenas <strong>30 minutos</strong>. Conclua o atendimento no WhatsApp para garantir sua vaga.</p>
+        <p class="modal-warning">⚠️ Atenção: Seu horário ficará reservado por apenas <strong>1 hora</strong>. Conclua o atendimento no WhatsApp para garantir sua vaga.</p>
         <button onclick="closeModal()" class="btn-back">Voltar</button>
     </div>
 </div>
